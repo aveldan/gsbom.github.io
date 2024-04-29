@@ -1,0 +1,114 @@
+<html>
+	<head>
+		<center>
+		<h1>Dependency Graph</h1>
+		</center>
+		<script src="https://d3js.org/d3.v5.js"></script>
+		<script src="https://unpkg.com/viz.js@1.8.1/viz.js" type="application/javascript"></script>
+		<script src="https://unpkg.com/d3-graphviz@2.1.0/build/d3-graphviz.js"></script>
+	</head>
+	<body>
+	<div id="graph" style="text-align: center;"></div>
+	<script>
+
+		let graph_dot = `strict digraph sbom {
+            size="8,10.5"; ratio=fill;
+            "it-depends" [shape=box, style=filled, fontcolor=white, fillcolor=red label="it-depends
+        LGPL-3.0-or-later"];
+            "graphviz" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="graphviz
+        MIT"];
+            "it-depends" -> "graphviz";
+            "johnnydep" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="johnnydep
+        MIT"];
+            "it-depends" -> "johnnydep";
+            "appdirs" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="appdirs
+        MIT"];
+            "it-depends" -> "appdirs";
+            "networkx" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="networkx
+        NOASSERTION"];
+            "it-depends" -> "networkx";
+            "parse-cmake" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="parse-cmake
+        Apache-2.0"];
+            "it-depends" -> "parse-cmake";
+            "semantic-version" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="semantic-version
+        BSD-3-Clause"];
+            "it-depends" -> "semantic-version";
+            "sqlalchemy" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="sqlalchemy
+        MIT"];
+            "it-depends" -> "sqlalchemy";
+            "docker" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="docker
+        Apache-2.0"];
+            "it-depends" -> "docker";
+            "tqdm" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="tqdm
+        MPL-2.0 AND MIT"];
+            "it-depends" -> "tqdm";
+            "requests" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="requests
+        Apache-2.0"];
+            "it-depends" -> "requests";
+            "urllib3" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="urllib3
+        MIT"];
+            "it-depends" -> "urllib3";
+            "anytree" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="anytree
+        Apache-2.0"];
+            "johnnydep" -> "anytree";
+            "cachetools" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="cachetools
+        MIT"];
+            "johnnydep" -> "cachetools";
+            "oyaml" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="oyaml
+        MIT"];
+            "johnnydep" -> "oyaml";
+            "pip" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="pip
+        MIT"];
+            "johnnydep" -> "pip";
+            "structlog" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="structlog
+        NOASSERTION"];
+            "johnnydep" -> "structlog";
+            "tabulate" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="tabulate
+        MIT"];
+            "johnnydep" -> "tabulate";
+            "toml" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="toml
+        MIT"];
+            "johnnydep" -> "toml";
+            "wheel" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="wheel
+        MIT"];
+            "johnnydep" -> "wheel";
+            "wimpy" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="wimpy
+        MIT"];
+            "johnnydep" -> "wimpy";
+            "packaging" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="packaging
+        NOASSERTION"];
+            "johnnydep" -> "packaging";
+            "six" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="six
+        MIT"];
+            "anytree" -> "six";
+            "pyyaml" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="pyyaml
+        MIT"];
+            "oyaml" -> "pyyaml";
+            "pypeg2" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="pypeg2
+        NOASSERTION"];
+            "parse-cmake" -> "pypeg2";
+            "greenlet" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="greenlet
+        MIT"];
+            "sqlalchemy" -> "greenlet";
+            "typing-extensions" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="typing-extensions
+        NOASSERTION"];
+            "sqlalchemy" -> "typing-extensions";
+            "docker" -> "packaging";
+            "docker" -> "requests";
+            "docker" -> "urllib3";
+            "certifi" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="certifi
+        MPL-2.0"];
+            "requests" -> "certifi";
+            "charset-normalizer" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="charset-normalizer
+        MIT"];
+            "requests" -> "charset-normalizer";
+            "idna" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="idna
+        BSD-3-Clause"];
+            "requests" -> "idna";
+            "requests" -> "urllib3";
+        }`
+
+        d3.select("#graph").graphviz().renderDot(graph_dot);
+    </script>
+	</body>
+</html>

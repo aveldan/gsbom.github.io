@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<center>
+		<h1>Dependency Graph</h1>
+		</center>
+		<script src="https://d3js.org/d3.v5.js"></script>
+		<script src="https://unpkg.com/viz.js@1.8.1/viz.js" type="application/javascript"></script>
+		<script src="https://unpkg.com/d3-graphviz@2.1.0/build/d3-graphviz.js"></script>
+	</head>
+	<body>
+	<div id="graph" style="text-align: center;"></div>
+	<script>
+
+		let graph_dot = `strict digraph sbom {
+            size="8,10.5"; ratio=fill;
+            "graphtage" [shape=box, style=filled, fontcolor=white, fillcolor=red label="graphtage
+        LGPL-3.0-or-later"];
+            "numpy" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="numpy
+        NOASSERTION"];
+            "graphtage" -> "numpy";
+            "pyyaml" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="pyyaml
+        MIT"];
+            "graphtage" -> "pyyaml";
+            "scipy" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="scipy
+        NOASSERTION"];
+            "graphtage" -> "scipy";
+            "tqdm" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="tqdm
+        MPL-2.0 AND MIT"];
+            "graphtage" -> "tqdm";
+            "typing-extensions" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="typing-extensions
+        NOASSERTION"];
+            "graphtage" -> "typing-extensions";
+            "colorama" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="colorama
+        BSD-3-Clause"];
+            "graphtage" -> "colorama";
+            "fickling" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="fickling
+        NOASSERTION"];
+            "graphtage" -> "fickling";
+            "intervaltree" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="intervaltree
+        Apache-2.0"];
+            "graphtage" -> "intervaltree";
+            "json5" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="json5
+        Apache-2.0"];
+            "graphtage" -> "json5";
+            "scipy" -> "numpy";
+            "astunparse" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="astunparse
+        BSD-3-Clause"];
+            "fickling" -> "astunparse";
+            "six" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="six
+        MIT"];
+            "astunparse" -> "six";
+            "wheel" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="wheel
+        MIT"];
+            "astunparse" -> "wheel";
+            "sortedcontainers" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="sortedcontainers
+        Apache-2.0"];
+            "intervaltree" -> "sortedcontainers";
+        }`
+
+        d3.select("#graph").graphviz().renderDot(graph_dot);
+    </script>
+	</body>
+</html>

@@ -1,0 +1,134 @@
+<html>
+	<head>
+		<center>
+		<h1>Dependency Graph</h1>
+		</center>
+		<script src="https://d3js.org/d3.v5.js"></script>
+		<script src="https://unpkg.com/viz.js@1.8.1/viz.js" type="application/javascript"></script>
+		<script src="https://unpkg.com/d3-graphviz@2.1.0/build/d3-graphviz.js"></script>
+	</head>
+	<body>
+	<div id="graph" style="text-align: center;"></div>
+	<script>
+
+		let graph_dot = `strict digraph sbom {
+			size="8,10.5"; ratio=fill;
+			"accelerate" [shape=box, style=filled, fontcolor=white, fillcolor=red label="accelerate
+		Apache-2.0"];
+			"numpy" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="numpy
+		NOASSERTION"];
+			"accelerate" -> "numpy";
+			"psutil" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="psutil
+		BSD-3-Clause"];
+			"accelerate" -> "psutil";
+			"safetensors" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="safetensors
+		NOASSERTION"];
+			"accelerate" -> "safetensors";
+			"torch" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="torch
+		BSD-3-Clause"];
+			"accelerate" -> "torch";
+			"huggingface-hub" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="huggingface-hub
+		Apache-2.0"];
+			"accelerate" -> "huggingface-hub";
+			"packaging" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="packaging
+		NOASSERTION"];
+			"accelerate" -> "packaging";
+			"pyyaml" [shape=box, style=filled, fontcolor=white, fillcolor=royalblue label="pyyaml
+		MIT"];
+			"accelerate" -> "pyyaml";
+			"typing-extensions" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="typing-extensions
+		NOASSERTION"];
+			"torch" -> "typing-extensions";
+			"jinja2" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="jinja2
+		BSD-3-Clause"];
+			"torch" -> "jinja2";
+			"networkx" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="networkx
+		NOASSERTION"];
+			"torch" -> "networkx";
+			"nvidia-cublas-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-cublas-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-cublas-cu12";
+			"nvidia-cuda-cupti-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-cuda-cupti-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-cuda-cupti-cu12";
+			"nvidia-cuda-nvrtc-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-cuda-nvrtc-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-cuda-nvrtc-cu12";
+			"nvidia-cuda-runtime-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-cuda-runtime-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-cuda-runtime-cu12";
+			"nvidia-cudnn-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-cudnn-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-cudnn-cu12";
+			"nvidia-cufft-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-cufft-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-cufft-cu12";
+			"nvidia-curand-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-curand-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-curand-cu12";
+			"nvidia-cusolver-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-cusolver-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-cusolver-cu12";
+			"nvidia-cusparse-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-cusparse-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-cusparse-cu12";
+			"filelock" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="filelock
+		Unlicense"];
+			"torch" -> "filelock";
+			"nvidia-nccl-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-nccl-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-nccl-cu12";
+			"nvidia-nvtx-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-nvtx-cu12
+		NOASSERTION"];
+			"torch" -> "nvidia-nvtx-cu12";
+			"sympy" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="sympy
+		BSD-3-Clause"];
+			"torch" -> "sympy";
+			"triton" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="triton
+		NOASSERTION"];
+			"torch" -> "triton";
+			"fsspec" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="fsspec
+		BSD-3-Clause"];
+			"torch" -> "fsspec";
+			"tqdm" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="tqdm
+		MPL-2.0 AND MIT"];
+			"huggingface-hub" -> "tqdm";
+			"huggingface-hub" -> "typing-extensions";
+			"huggingface-hub" -> "filelock";
+			"huggingface-hub" -> "fsspec";
+			"huggingface-hub" -> "packaging";
+			"huggingface-hub" -> "pyyaml";
+			"requests" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="requests
+		Apache-2.0"];
+			"huggingface-hub" -> "requests";
+			"nvidia-cudnn-cu12" -> "nvidia-cublas-cu12";
+			"nvidia-cusolver-cu12" -> "nvidia-cublas-cu12";
+			"nvidia-cusolver-cu12" -> "nvidia-cusparse-cu12";
+			"nvidia-nvjitlink-cu12" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="nvidia-nvjitlink-cu12
+		NOASSERTION"];
+			"nvidia-cusolver-cu12" -> "nvidia-nvjitlink-cu12";
+			"nvidia-cusparse-cu12" -> "nvidia-nvjitlink-cu12";
+			"mpmath" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="mpmath
+		BSD-3-Clause"];
+			"sympy" -> "mpmath";
+			"triton" -> "filelock";
+			"idna" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="idna
+		BSD-3-Clause"];
+			"requests" -> "idna";
+			"urllib3" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="urllib3
+		MIT"];
+			"requests" -> "urllib3";
+			"certifi" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="certifi
+		MPL-2.0"];
+			"requests" -> "certifi";
+			"charset-normalizer" [shape=box, style=filled, fontcolor=white, fillcolor=darkgreen label="charset-normalizer
+		MIT"];
+			"requests" -> "charset-normalizer";
+		}
+		`
+
+	
+        d3.select("#graph").graphviz().renderDot(graph_dot);
+    </script>
+	</body>
+</html>
