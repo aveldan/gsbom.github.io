@@ -1,64 +1,82 @@
 <html>
-<head>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
-    <style type="text/css">
-    mynetwork {
-        width: 800px;
-        height: 400px;
-        border: 1px solid lightgray;
-    }
-    </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
-<center>
-<h1>Dependency Graph</h1>
-</center>
-</head>
-<body>
-<div id = "mynetwork"></div>
-<script>
-    var edges;
-    var nodes;
-    var network;
-    var container;
-    var options, data;
-    function drawGraph() {
-        var container = document.getElementById('mynetwork');
+    <head>
+        <title>SBOM Usability Evaluation Experiment</title>
+        <link rel='stylesheet' href='https://pro.fontawesome.com/releases/v5.15.3/css/all.css'>
+        <style>
+            @import "https://fonts.googleapis.com/css?family=Press%20Start%202P";
 
-        nodes = new vis.DataSet([{'id': 0, 'label': 'ubuntu:/lib/x86_64-linux-gnu/libc.so.6'}, {'id': 1, 'label': 'ubuntu:/lib/x86_64-linux-gnu/libdl.so.2'}, {'id': 2, 'label': 'ubuntu:/lib/x86_64-linux-gnu/libnss_files.so.2'}, {'id': 3, 'label': 'ubuntu:/lib/x86_64-linux-gnu/libtinfo.so.6'}, {'id': 4, 'label': 'pip:accelerate', 'shape': 'square', 'color': 'red', 'borderWidth': 4}, {'id': 5, 'label': 'pip:huggingface-hub'}, {'id': 6, 'label': 'pip:numpy'}, {'id': 7, 'label': 'pip:packaging'}, {'id': 8, 'label': 'pip:psutil', 'color': 'red'}, {'id': 9, 'label': 'pip:pyyaml'}, {'id': 10, 'label': 'pip:safetensors'}, {'id': 11, 'label': 'pip:torch', 'color': 'red'}]);
-        edges = new vis.DataSet([{'from': 4, 'to': 11, 'shape': 'dot'}, {'from': 4, 'to': 0, 'shape': 'dot'}, {'from': 4, 'to': 3, 'shape': 'dot'}, {'from': 4, 'to': 1, 'shape': 'dot'}, {'from': 4, 'to': 2, 'shape': 'dot'}, {'from': 4, 'to': 10, 'shape': 'dot'}, {'from': 4, 'to': 7, 'shape': 'dot'}, {'from': 4, 'to': 6, 'shape': 'dot'}, {'from': 4, 'to': 9, 'shape': 'dot'}, {'from': 4, 'to': 8, 'shape': 'dot'}, {'from': 4, 'to': 5, 'shape': 'dot'}, {'from': 5, 'to': 9, 'shape': 'dot'}, {'from': 5, 'to': 7, 'shape': 'dot'}, {'from': 11, 'to': 2, 'shape': 'dot'}, {'from': 11, 'to': 0, 'shape': 'dot'}, {'from': 11, 'to': 3, 'shape': 'dot'}, {'from': 11, 'to': 1, 'shape': 'dot'}]);
-
-        data = {nodes: nodes, edges: edges};
-
-
-        const options = {
-            manipulation: false,
-            height: "90%",
-            physics: {
-                hierarchicalRepulsion: {
-                nodeDistance: 300,
-                },
-            },
-            edges: {
-                color: {
-                    inherit: false
-                },
-                arrows: {
-                    to: true,
-                },
-            },
-            layout: {
-                improvedLayout: false
+            * {
+                margin: 0;
+                padding: 0;
             }
-        };
 
+            html, body {
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                font-family: 'Press Start 2P';
+                font-size: 1rem;
+                line-height: 2;
+                height: 100%;
+                background-color: rgb(20, 20, 10);
+                text-transform: uppercase;
+            }
 
+            a {
+                text-decoration: none;
+                color: #fff090;
+            }
 
-        network = new vis.Network(container, data, options);
+            h1{
+                color: #5a3806;
+            }
 
-        return network;
-    }
+            p{
+                color: #5a3806;
+            }
 
-    drawGraph();
-</script>
-</body>
+            li {
+                color: #4FAF44;
+            }
+
+            .arrow i {
+                display: none;
+            }
+
+            .arrow {
+                position:relative;
+                display: block;
+                color: #F6EB14;
+            }
+
+            .arrow:hover {
+                cursor: pointer;
+                background-color: rgba(0,0,0,0.2);
+            }
+
+            .arrow:hover i { 
+                display: block;
+                position: absolute;
+                top: 0.50em; 
+                left: -6em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main-body">
+            <h1>SBOM Usability Evaluation Experimen</h1>
+            <p>It-depends</p>
+            <ol>
+                <li><a class="arrow" href="./it-depends/accelerate.html"><i class="fas fa-arrow-alt-right"></i>accelerate</a></li>
+                <li><a class="arrow" href="./it-depends/it_depends.html"><i class="fas fa-arrow-alt-right"></i>it_depends</a></li>
+                <li><a class="arrow" href="./it-depends/graphtage.html"><i class="fas fa-arrow-alt-right"></i>graphtage</a></li>
+            </ol>
+            <p>Sbom2Dot</p>
+            <ol>
+                <li><a class="arrow" href="./sbom2dot/accelerate.html"><i class="fas fa-arrow-alt-right"></i>accelerate</a></li>
+                <li><a class="arrow" href="./sbom2dot/it_depends.html"><i class="fas fa-arrow-alt-right"></i>it_depends</a></li>
+                <li><a class="arrow" href="./sbom2dot/grapgtage.html"><i class="fas fa-arrow-alt-right"></i>graphtage</a></li>
+            </ol>
+        </div>
+    </body>
 </html>
